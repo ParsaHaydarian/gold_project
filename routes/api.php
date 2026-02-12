@@ -17,16 +17,6 @@ Route::post('/user/login' , [UserController::class , 'register']);
 Route::post('/admin/register/' , [AdminController::class , 'register']);
 Route::post('/admin/login' , [AdminController::class , 'login']);
 
-/*
-|--------------------------------------------------------------------------
-| User guards Routes
-|--------------------------------------------------------------------------
-*/
-Route::group(['middleware' => ['auth:user'] , 'prefix' => 'user'], function() {
-    
-
-    Route::post('/user/logout' , [UserController::class , 'logout']);
-});
 
 /*
 |--------------------------------------------------------------------------
@@ -34,15 +24,50 @@ Route::group(['middleware' => ['auth:user'] , 'prefix' => 'user'], function() {
 |--------------------------------------------------------------------------
 */
 
-Route::group(['middleware' => ['auth:admin'] , 'prefix' => 'admin'], function() {
+Route::group(['prefix' => 'admin'], function() {
     /*
     |--------------------------------------------------------------------------
-    | Story Routes
+    | Story
     |--------------------------------------------------------------------------
     */
     Route::get('/get-story-fields', [StoryController::class, 'get']);
+    Route::get('/get-story/{id}' , [StoryController::class, 'get']);
     Route::post('/add-story', [StoryController::class, 'store']);
+    Route::put('/update-story/{id}' , [StoryController::class, 'update']);
     Route::delete('/delete-story/{id}', [StoryController::class, 'destroy']);
 
+    /*
+    |--------------------------------------------------------------------------
+    | FAQ
+    |--------------------------------------------------------------------------
+    */
+
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | Privacy Policy
+    |--------------------------------------------------------------------------
+    */
+
+    /*
+    |--------------------------------------------------------------------------
+    | About Us
+    |--------------------------------------------------------------------------
+    */
+
     Route::post('/admin/logout' , [AdminController::class , 'logout']);
+});
+
+
+
+/*
+|--------------------------------------------------------------------------
+| User guards Routes
+|--------------------------------------------------------------------------
+*/
+Route::group(['middleware' => ['auth:user'] , 'prefix' => 'user'], function() {
+
+
+    Route::post('/user/logout' , [UserController::class , 'logout']);
 });
