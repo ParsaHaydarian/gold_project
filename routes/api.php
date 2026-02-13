@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\StoryController;
+use App\Http\Controllers\FAQController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,6 +31,7 @@ Route::group(['prefix' => 'admin'], function() {
     | Story
     |--------------------------------------------------------------------------
     */
+
     Route::get('/get-story-fields', [StoryController::class, 'get']);
     Route::get('/get-story/{id}' , [StoryController::class, 'get']);
     Route::post('/add-story', [StoryController::class, 'store']);
@@ -42,13 +44,18 @@ Route::group(['prefix' => 'admin'], function() {
     |--------------------------------------------------------------------------
     */
 
-
+    Route::get('/get-faq/' , [FAQController::class, 'get']);
+    Route::post('/add-faq/' , [FAQController::class, 'store']);
+    Route::put('/edit-faq/{id}' , [FAQController::class, 'update']);
+    Route::delete('/delete-faq/{id}', [FAQController::class, 'delete']);
 
     /*
     |--------------------------------------------------------------------------
     | Privacy Policy
     |--------------------------------------------------------------------------
     */
+
+    
 
     /*
     |--------------------------------------------------------------------------
